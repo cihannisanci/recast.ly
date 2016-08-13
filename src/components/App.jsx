@@ -9,7 +9,6 @@ class App extends React.Component {
   }
 
   videoClick(video) {
-    console.dir(video);
     this.setState({
       currentVideo: video
     });
