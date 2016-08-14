@@ -29,7 +29,7 @@ class App extends React.Component {
     this.setState({
       currentQuery: text
     });
-    this.props.searchYouTube({query: this.state.currentQuery, key: YOUTUBE_API_KEY, max: '10'}, this.setVideoList);
+    this.props.searchYouTube({query: this.state.currentQuery, key: YOUTUBE_API_KEY, max: '10'}, _.debounce(this.setVideoList, 300));
   }
 
 
