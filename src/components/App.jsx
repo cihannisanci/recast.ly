@@ -1,11 +1,35 @@
 class App extends React.Component {
   
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      currentVideo: exampleVideoData[0]
+      currentVideo: exampleVideoData[0],
+      currentVideoList: exampleVideoData,
+      currentQuery: 'Jason Bourne'
     };
     this.videoClick = this.videoClick.bind(this);
+    this.setVideoList = this.setVideoList.bind(this);
+    this.options = {query: this.state.currentQuery, key: YOUTUBE_API_KEY, max: '10' };
+  }
+
+
+  componentWillMount() {
+    this.props.searchYouTube(this.options, this.setVideoList);
+  }
+
+  inputTyping(text) {
+    console.log(text);
+    this.setState({
+      currentQuery: text
+    });
+    this.props.searchYouTube({query: this.state.currentQuery, key: YOUTUBE_API_KEY, max: '10'}, this.setVideoList);
+  }
+
+
+  setVideoList(videoList) {
+    this.setState({
+      currentVideoList: videoList
+    });
   }
 
   videoClick(video) {
@@ -16,15 +40,15 @@ class App extends React.Component {
 
   render() {
     return (
-    <div>
-      <Nav />
-      <div className="col-md-7">
-        <VideoPlayer video={this.state.currentVideo}/>
+      <div>
+        <Nav handleInputTyping = {this.inputTyping.bind(this)}/>
+        <div className="col-md-7">
+          <VideoPlayer video={this.state.currentVideo}/>
+        </div>
+        <div className="col-md-5">
+          <VideoList handleVideoClick={this.videoClick} videos={this.state.currentVideoList}/>
+        </div>
       </div>
-      <div className="col-md-5">
-        <VideoList listedVideo={this.videoClick} videos={exampleVideoData}/>
-      </div>
-    </div>
    );
   }
 }

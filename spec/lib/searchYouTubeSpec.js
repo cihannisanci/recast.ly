@@ -51,7 +51,7 @@ describe('searchYouTube', function() {
 
   it('should send a GET request', function() {
     searchYouTube({}, () => {});
-
+    console.log(requests);
     expect(requests[0].method).to.equal('GET');
   });
 

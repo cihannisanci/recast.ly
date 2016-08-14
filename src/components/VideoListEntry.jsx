@@ -2,15 +2,15 @@ var VideoListEntry = (props) => {
 
   return (
   <div
-    data-video={props.video}
      className="video-list-entry">
     <div className="media-left media-middle">
-      <img className="media-object"  
+      <img onClick={() => props.handleVideoClick(props.video)}
+           className="media-object"  
            src={props.video.snippet.thumbnails.default.url} 
            alt="" />
     </div>
     <div className="media-body">
-      <div onClick={() => props.listedVideo(props.video)} className="video-list-entry-title">{props.video.snippet.title}</div>
+      <div onClick={() => props.handleVideoClick(props.video)} className="video-list-entry-title">{props.video.snippet.title}</div>
       <div className="video-list-entry-detail">{props.video.snippet.description}</div>
     </div>
   </div>
@@ -20,7 +20,7 @@ var VideoListEntry = (props) => {
 // Warnings will be shown in the console when the defined rules are violated
 VideoListEntry.propTypes = {
   video: React.PropTypes.object.isRequired,
-  listedVideo: React.PropTypes.func.isRequired
+  handleVideoClick: React.PropTypes.func.isRequired
 };
 
 // In the ES6 spec, files are "modules" and do not share a top-level scope
