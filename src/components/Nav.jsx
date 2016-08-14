@@ -1,7 +1,7 @@
-var Nav = (props) => (
+var Nav = ({handleInputTyping, handleInputEnter}) => (
   <nav className="navbar">
     <div className="col-md-6 col-md-offset-3">
-      <Search handleInputTyping = {props.handleInputTyping} />
+      <Search handleInputTyping = {handleInputTyping} handleInputEnter = {handleInputEnter}/>
     </div>
   </nav>
 );

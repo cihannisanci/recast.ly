@@ -17,6 +17,13 @@ class App extends React.Component {
     this.props.searchYouTube(this.options, this.setVideoList);
   }
 
+  inputPressEnter(text) {
+    this.setState({
+      entered: text
+    });
+    this.props.searchYouTube({query: this.state.currentQuery, key: YOUTUBE_API_KEY, max: '10'}, this.setVideo.bind(this));
+  }
+
   inputTyping(text) {
     console.log(text);
     this.setState({
@@ -31,6 +38,13 @@ class App extends React.Component {
       currentVideoList: videoList
     });
   }
+  setVideo(videos) {
+    if (videos) {
+      this.setState({
+        currentVideo: videos[0]
+      });
+    }
+  }
 
   videoClick(video) {
     this.setState({
@@ -41,7 +55,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Nav handleInputTyping = {this.inputTyping.bind(this)}/>
+        <Nav handleInputTyping = {this.inputTyping.bind(this)} handleInputEnter = {this.inputPressEnter.bind(this)}/>
         <div className="col-md-7">
           <VideoPlayer video={this.state.currentVideo}/>
         </div>
