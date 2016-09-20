@@ -1,7 +1,7 @@
-var Nav = () => (
+var Nav = ({handleInputTyping, handleInputEnter}) => (
   <nav className="navbar">
     <div className="col-md-6 col-md-offset-3">
-      <Search />
+      <Search handleInputTyping = {handleInputTyping} handleInputEnter = {handleInputEnter}/>
     </div>
   </nav>
 );
